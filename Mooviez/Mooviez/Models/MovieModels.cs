@@ -51,7 +51,8 @@ namespace Mooviez.Models
         public Movie GetMovie(string genre)
         {
             WebClient web = new WebClient();
-
+            var url = "http://www.omdbapi.com/";
+     
         }
 
     }
