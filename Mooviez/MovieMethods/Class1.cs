@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MovieMethods
 {
-    public class MovieMethods
+    public class Class1
     {
     }
 }
