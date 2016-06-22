@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Net;
 
 namespace Mooviez.Models
 {
@@ -45,6 +46,12 @@ namespace Mooviez.Models
             public string Production { get; set; }
             public string Website { get; set; }
             public string Response { get; set; }
+        }
+
+        public Movie GetMovie(string genre)
+        {
+            WebClient web = new WebClient();
+
         }
 
     }
