@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Net;
 
+
 namespace Mooviez.Models
 {
     public class MovieModels
@@ -48,11 +49,14 @@ namespace Mooviez.Models
             public string Response { get; set; }
         }
 
-        public Movie GetMovie(string genre)
+        public static Movie GetMovie()
         {
             WebClient web = new WebClient();
-            var url = "http://www.omdbapi.com/";
-     
+            var url = "http://www.omdbapi.com/?t=shutter+island&y=&plot=short&r=json&tomatoes=true";
+            var content = web.DownloadString(url);
+            Movie m = new Movie();
+            m = Newtonsoft.Json.JsonConvert.DeserializeObject<Movie>(content);
+            return m;
         }
 
     }

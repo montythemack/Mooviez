@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Mooviez.Models;
 
 namespace Mooviez.Controllers
 {
@@ -14,7 +15,7 @@ namespace Mooviez.Controllers
         public ActionResult Index(FormCollection collection)
         {
             string genre = collection.GetValues("genre").GetValue(0).ToString();
-
+            MovieModels.GetMovie();
             return View();
         }
         public ActionResult About()
