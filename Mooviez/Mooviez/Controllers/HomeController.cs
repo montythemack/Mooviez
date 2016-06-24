@@ -7,8 +7,8 @@ namespace Mooviez.Controllers
     {
         public ActionResult Index()
         {
-            
-            return View();
+            Genres g = MovieModels.getGenres();
+            return View(g);
         }
 
         [HttpPost]

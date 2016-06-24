@@ -7,6 +7,20 @@ using System.Net;
 
 namespace Mooviez.Models
 {
+    public class Genres
+    {
+        public List<Genre> genres { get; set; }
+
+    }
+
+    public class Genre
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+    }
+
+    
+
     public class Movie
     {
         public bool adult { get; set; }
@@ -35,9 +49,17 @@ namespace Mooviez.Models
     {
         public static string key = "ac8d638fbb365666e840e4e79059dbc2";
 
-        
 
-        
+
+        public static Genres getGenres()
+        {
+            WebClient web = new WebClient();
+            var url = "http://api.themoviedb.org/3/genre/movie/list?api_key=ac8d638fbb365666e840e4e79059dbc2";
+            var content = web.DownloadString(url);
+            Genres g = new Genres();
+            g = Newtonsoft.Json.JsonConvert.DeserializeObject<Genres>(content);
+            return g;
+        }
 
         public static Movies GetMovie()
         {
