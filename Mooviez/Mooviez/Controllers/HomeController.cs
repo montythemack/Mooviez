@@ -15,8 +15,9 @@ namespace Mooviez.Controllers
         public ActionResult Index(FormCollection collection)
         {
             string genre = collection.GetValues("genre").GetValue(0).ToString();
-            MovieModels.GetMovie();
-            return View();
+            
+            Movies m = MovieModels.GetMovie();
+            return View(m);
         }
         public ActionResult About()
         {
