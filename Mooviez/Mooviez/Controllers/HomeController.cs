@@ -8,15 +8,22 @@ namespace Mooviez.Controllers
         public ActionResult Index()
         {
             Genres g = MovieModels.getGenres();
-            return View(g);
+            ViewData["genre"] = g.genres;
+            return View();
         }
 
         [HttpPost]
         public ActionResult Index(FormCollection collection)
         {
-            string genre = collection.GetValues("genre").GetValue(0).ToString();
+            string genre = Request.Form["genre"];
+            genre = genre.Replace(',', '|');
             
-            Movies m = MovieModels.GetMovie();
+            Movies m = MovieModels.GetMovie(genre);
+            Genres g = MovieModels.getGenres();
+            Config config = MovieModels.GetMovieConfig();
+            ViewData["genre"] = g.genres;
+            ViewData["baseURL"] = config.images.secure_base_url;
+            ViewData["imageSize"] = config.images.poster_sizes[3];
             return View(m);
         }
         public ActionResult About()

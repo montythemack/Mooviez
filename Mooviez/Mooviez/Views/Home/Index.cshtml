@@ -1,26 +1,56 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    ;
 }
 
-<div class="container">
+
+    
     <div class="row">
-        <div class="col s12"><h2 class="center-align">Monty's Picks</h2></div>
-    </div>
+        <form method="post">
 
+            <div class="input-field col s6">
+                <select name="genre" id="genre" multiple>
+                    <option value="" disabled selected>Select a genre</option>
+                    @foreach (var item in (ViewData["genre"] as List<Mooviez.Models.Genre>))
+                    {
+                        <option value="@item.id">@item.name</option>
+                    }
+                </select>
 
+            </div>
+            <div class="col s6" style="margin-top:25px">
+                <button type="submit" name="submit" class="waves-effect waves-light btn">Submit</button>
+            </div>
+         
+        </form>
+        </div>
+       @{ if (Model != null)
+           {
+            <div class="row">
+                
+                @foreach (var item in Model.results)
+                {
+                    <div class="col s4">
+                        <div class="card">
+                            <div class="card-image">
+                                <img src="@ViewData["baseURL"]@ViewData["imageSize"]@item.poster_path">
+                                <span class="card-title">Card Title</span>
+                            </div>
+                            <div class="card-content">
+                                <p>
+                                    I am a very simple card. I am good at containing small bits of information.
+                                    I am convenient because I require little markup to use effectively.
+                                </p>
+                            </div>
+                            <div class="card-action">
+                                <a href="#">This is a link</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+                
+            </div>
 
-    <form method="post">
-     
-               <div class="input-field col s12">
-                   <select multiple>
-                       <option value="" disabled selected>Choose your option</option>
-                       <option value="1">Option 1</option>
-                       <option value="2">Option 2</option>
-                       <option value="3">Option 3</option>
-                   </select>
-  
-               </div>
-
-           <button type="submit" name="submit" class="btn btn-default">Submit</button>
-    </form>
-  </div>  
+           }
+   }
+    
