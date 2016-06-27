@@ -1,13 +1,12 @@
 ﻿@{
     ViewBag.Title = "Home Page";
-    ;
+    var selected = ViewData["selected"] as IEnumerable<SelectListItem>;
 }
 
 
     
     <div class="row">
         <form method="post">
-
             <div class="input-field col s6">
                 <select name="genre" id="genre" multiple>
                     <option value="" disabled selected>Select a genre</option>
@@ -30,23 +29,19 @@
                 
                 @foreach (var item in Model.results)
                 {
-                    <div class="col s4">
-                        <div class="card">
-                            <div class="card-image">
-                                <img src="@ViewData["baseURL"]@ViewData["imageSize"]@item.poster_path">
-                                <span class="card-title">Card Title</span>
-                            </div>
-                            <div class="card-content">
-                                <p>
-                                    I am a very simple card. I am good at containing small bits of information.
-                                    I am convenient because I require little markup to use effectively.
-                                </p>
-                            </div>
-                            <div class="card-action">
-                                <a href="#">This is a link</a>
+                    
+                        <div class="col s3">
+                            <div class="card hoverable">
+                                <div class="card-image waves-effect waves-block waves-light">
+                                    <img class="activator" src="@ViewData["baseURL"]@ViewData["imageSize"]@item.poster_path">
+                                </div>
+                                <div class="card-reveal">
+                                    <span class="card-title grey-text text-darken-4" style="font-size:14px">@item.title<i class="material-icons right">close</i></span>
+                                    <p style="font-size:12px">@item.overview</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                   
                 }
                 
             </div>

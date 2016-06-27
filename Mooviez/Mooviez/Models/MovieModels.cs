@@ -90,7 +90,7 @@ namespace Mooviez.Models
         public static Movies GetMovie(string genre)
         {
             WebClient web = new WebClient();
-            var url = "https://api.themoviedb.org/3/discover/movie?api_key=ac8d638fbb365666e840e4e79059dbc2";
+            var url = "https://api.themoviedb.org/3/discover/movie?api_key=ac8d638fbb365666e840e4e79059dbc2&primary_release_date.lte=2016-06-26";
             if (genre != null)
             {
                 url += "&with_genres="+genre;
@@ -101,6 +101,14 @@ namespace Mooviez.Models
             return m;
             
         }
-
+        public static Movies GetMovie()
+        {
+            WebClient web = new WebClient();
+            var url = "http://api.themoviedb.org/3/movie/popular?api_key=ac8d638fbb365666e840e4e79059dbc2&primary_release_date.lte=2016-06-26";
+            var content = web.DownloadString(url);
+            Movies m = new Movies();
+            m = Newtonsoft.Json.JsonConvert.DeserializeObject<Movies>(content);
+            return m;
+        }
     }
 }

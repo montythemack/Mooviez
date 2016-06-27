@@ -7,15 +7,20 @@ namespace Mooviez.Controllers
     {
         public ActionResult Index()
         {
+            Movies m = MovieModels.GetMovie();
             Genres g = MovieModels.getGenres();
+            Config config = MovieModels.GetMovieConfig();
             ViewData["genre"] = g.genres;
-            return View();
+            ViewData["baseURL"] = config.images.secure_base_url;
+            ViewData["imageSize"] = config.images.poster_sizes[3];
+            return View(m);
         }
 
         [HttpPost]
         public ActionResult Index(FormCollection collection)
         {
             string genre = Request.Form["genre"];
+            ViewData["selected"] = genre.Split(',');
             genre = genre.Replace(',', '|');
             
             Movies m = MovieModels.GetMovie(genre);
